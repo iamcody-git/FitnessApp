@@ -2,7 +2,6 @@ import { Sequelize } from "sequelize-typescript";
 import User from "./models/User";
 import PackageRecommendation from "./models/PackageRecommendation";
 import Package from "./models/Package";
-import PackageWorkout from "./models/PackageWorkout"
 import Workout from "./models/Workout";
 import UserProfile from "./models/UserProfile";
 
@@ -28,19 +27,14 @@ sequelize
 sequelize.sync({ force: false}).then(() => {
   console.log("Database synced");
 });
+
 // Relationship between User and UserProfile
 User.hasOne(UserProfile, { foreignKey: 'userId' });
 UserProfile.belongsTo(User, { foreignKey: 'userId' });
-// //relation between user-and workout
-// User.hasMany(Workout, { foreignKey: 'userId' }); 
-// Workout.belongsTo(User, { foreignKey: 'userId' });
-// Relationship between Package and PackageWorkouts
-Package.hasMany(PackageWorkout, { foreignKey: 'packageId' });
-PackageWorkout.belongsTo(Package, { foreignKey: 'packageId' });
 
-// Relationship between Workout and PackageWorkouts
-Workout.hasMany(PackageWorkout, { foreignKey: 'workoutId' });
-PackageWorkout.belongsTo(Workout, { foreignKey: 'workoutId' });
+//relation between user-and workout
+User.hasMany(Workout, { foreignKey: 'userId' }); 
+Workout.belongsTo(User, { foreignKey: 'userId' });
 
 // Relationship between User and PackageRecommendations
 User.hasMany(PackageRecommendation, { foreignKey: "userId" });
@@ -49,5 +43,11 @@ PackageRecommendation.belongsTo(User, { foreignKey: "userId" });
 // Relationship between Package and PackageRecommendations
 Package.hasMany(PackageRecommendation, { foreignKey: "packageId" });
 PackageRecommendation.belongsTo(Package, { foreignKey: "packageId" });
+
+//package and workout relation
+Package.hasMany(Workout, { foreignKey: 'packageId' });
+Workout.belongsTo(Package, { foreignKey: 'packageId' });
+
+
 
 export default sequelize;

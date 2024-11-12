@@ -19,7 +19,7 @@ class Workout extends Model {
   })
   declare workoutName: string;
   @Column({
-    type: DataType.ENUM("cardio", "strength", "flexibility", "balance"),
+    type: DataType.ENUM("cardio", "strength", "flexibility"),
     allowNull: false,
   })
   declare type: string;

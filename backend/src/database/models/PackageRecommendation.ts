@@ -6,7 +6,7 @@ import { Table, Column, Model, DataType } from "sequelize-typescript";
   modelName: "PackageRecommendation",
   timestamps: true,
 })
-class PackageWorkout extends Model {
+class PackageRecommendation extends Model {
   @Column({
     primaryKey: true,
     type: DataType.UUID,
@@ -15,4 +15,4 @@ class PackageWorkout extends Model {
   declare id: string;
  
 }
-export default PackageWorkout;
+export default PackageRecommendation;

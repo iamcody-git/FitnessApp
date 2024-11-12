@@ -3,7 +3,7 @@ import User from "../database/models/User";
 import bcrypt from "bcrypt";
 import Jwt from "jsonwebtoken";
 
-class AuthController {
+class UserController {
   public static async registerUser(req: Request, res: Response): Promise<void> {
    
       const { username, email, password, role } = req.body;
@@ -22,6 +22,7 @@ class AuthController {
       res.status(200).json({
         message: "User created successfully",
       });
+      
   
   }
   public static async loginUser(req: Request, res: Response): Promise<void> {
@@ -61,4 +62,4 @@ class AuthController {
   }
 }
 
-export default AuthController;
+export default UserController;

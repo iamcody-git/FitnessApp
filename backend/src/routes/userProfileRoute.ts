@@ -1,6 +1,5 @@
 import express,{Router} from 'express'
 import errorHandler from '../services/catchAsyncError'
-import AuthController from '../controller/userController'
 import authMiddleWare, { Role } from '../middleware/authMiddleWare'
 import userProfileController from '../controller/userProfileController'
 const router:Router=express.Router()

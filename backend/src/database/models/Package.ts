@@ -14,14 +14,24 @@ class Package extends Model {
   })
   declare id: string;
   @Column({
-    type: DataType.STRING(100),
+    type: DataType.STRING,
     allowNull: false,
   })
-  declare name: string;
+  declare packageName: string;
   @Column({
     type: DataType.TEXT,
     allowNull: true,
   })
   declare description: string;
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  declare price: number;
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  declare duration: number;
 }
 export default Package;

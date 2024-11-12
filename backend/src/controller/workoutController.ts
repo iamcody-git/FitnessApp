@@ -9,7 +9,7 @@ class WorkoutController {
     res: Response
   ): Promise<void> {
     const userId = req.user?.id;
-    const { workoutName,type,level,duration,description} =
+    const { workoutName,type,level,duration,description,packageId} =
       req.body;
     if (
       !workoutName||!type||!level||!duration||!description
@@ -26,6 +26,8 @@ class WorkoutController {
      level,
      duration,
      description,
+     userId:userId,
+     packageId
     });
     res.status(200).json({
       message: "workout created successfully",
@@ -36,13 +38,13 @@ class WorkoutController {
     res: Response
   ): Promise<void> {
     const data = await Workout.findAll({
-      // include: [
-      //   {
-      //     model: User,
-      //     attributes: ["id"],
-      //   },
+      include: [
+        {
+          model: User,
+          attributes: ["id"],
+        },
     
-      // ],
+      ],
     });
     res.status(200).json({
       message: "workout fetched successfully",
@@ -75,7 +77,8 @@ class WorkoutController {
       });
     }
   }
-  public static async updateWorkout(req: Request, res: Response): Promise<void> {
+  public static async updateWorkout(req: AuthRequest, res: Response): Promise<void> {
+    const userId = req.user?.id;
     const { id } = req.params;
     console.log("workout id is :",id)
     //findAll returns array
@@ -85,7 +88,7 @@ class WorkoutController {
         } 
     });
     if (data.length > 0) {
-        const { workoutName,type,level,duration,description} = req.body;
+        const { workoutName,type,level,duration,description,packageId} = req.body;
         console.log("the content in body",req.body)
 
      const updateData= await Workout.update(
@@ -94,7 +97,9 @@ class WorkoutController {
         type,
         level,
         duration,
-        description
+        description,
+        packageId,
+        userId:userId,
         }, 
         { 
             where: 
