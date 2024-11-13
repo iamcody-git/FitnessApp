@@ -6,7 +6,7 @@ import packageController from '../controller/packageController'
 const router:Router=express.Router()
 
 router.route("/package")
-.get(authMiddleWare.isAuthenticated,authMiddleWare.resetrictTo(Role.ADMIN),packageController.getAllPackage)
+.get(packageController.getAllPackage)
 
 
 

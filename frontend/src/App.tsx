@@ -5,6 +5,9 @@ import Register from './pages/auth/register/Register'
 import Login from './pages/auth/login/Login'
 import { Provider } from 'react-redux'
 import store from './store/store'
+import Packages from './pages/Services'
+import UserProfile from './pages/userProfile/UserProfile'
+import UserDashboard from './pages/userProfile/UserDashboard'
 function App() {
   return (
     <>
@@ -15,6 +18,9 @@ function App() {
       <Route path="/about" element= {<About/>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/login" element={<Login/>}/> 
+      <Route path="/service" element={<Packages/>}/> 
+      <Route path="/userprofile" element={<UserProfile/>}/> 
+      <Route path="/userprofile/dashboard" element={<UserDashboard/>}/> 
      </Routes>
      </BrowserRouter>
      </Provider>
