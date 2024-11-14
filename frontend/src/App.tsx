@@ -8,6 +8,7 @@ import store from './store/store'
 import Packages from './pages/Services'
 import UserProfile from './pages/userProfile/UserProfile'
 import UserDashboard from './pages/userProfile/UserDashboard'
+
 function App() {
   return (
     <>
@@ -20,7 +21,7 @@ function App() {
       <Route path="/login" element={<Login/>}/> 
       <Route path="/service" element={<Packages/>}/> 
       <Route path="/userprofile" element={<UserProfile/>}/> 
-      <Route path="/userprofile/dashboard" element={<UserDashboard/>}/> 
+      <Route path="/userprofile/dashboard/:id" element={<UserDashboard/>}/> 
      </Routes>
      </BrowserRouter>
      </Provider>

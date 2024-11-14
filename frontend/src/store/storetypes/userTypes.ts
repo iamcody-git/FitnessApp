@@ -11,10 +11,10 @@ export interface UserProfile {
   User:User,
   createdAt:string,
   updatedAt:string,
+  recommendedPackage:string
 }
 export interface UserProfileState{
     userProfile:UserProfile [],
     status:authStatus ,
-    singleUser:UserProfile|null
-
+    singleUser:UserProfile|null,
 }

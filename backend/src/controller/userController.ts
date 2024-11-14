@@ -53,7 +53,7 @@ class UserController {
     }
 
     const token = Jwt.sign({ id: user.id }, process.env.SECRET_KEY as  string, {
-      expiresIn: "1h",
+      expiresIn: "30d",
     });
     res.status(200).json({
       message: "User logged in successfully",

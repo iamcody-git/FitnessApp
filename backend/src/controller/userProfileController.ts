@@ -60,35 +60,23 @@ class userProfileController {
     ];
 
     // Get the recommended package
-    const recommendedPackage = getRecommendedPackage(userProfileVector); // returns "Basic", "Gold", or "Platinum"
-    console.log("Recommended Package:", recommendedPackage); // Log to verify output
+    const recommendedPackage = getRecommendedPackage(userProfileVector);
 
     // Fetch the packages from the database
     const packages = await Package.findAll();
-    const packageNameToIdMap: { [key: string]: string } = {}; // Map packageName (string) to id (string)
+    const packageNameToIdMap: { [key: string]: string } = {};
 
-    // Log packages to ensure they're being fetched correctly
-    console.log("Packages from DB:", packages);
-
-    // Populate the packageNameToIdMap with packageName and id from each package in the database
     packages.forEach((pkg) => {
       const packageName = pkg.dataValues.packageName;
       const packageId = pkg.dataValues.id;
       if (packageName && packageId) {
-        packageNameToIdMap[packageName.toLowerCase()] = packageId; // Normalize to lowercase for case-insensitivity
+        packageNameToIdMap[packageName.toLowerCase()] = packageId;
       }
     });
 
-    // Log the populated map
-    console.log("Package Name to ID Map:", packageNameToIdMap);
-
-    // Normalize the recommended package to lowercase for case-insensitive comparison
     const recommendedPackageNormalized = recommendedPackage.toLowerCase();
     const recommendedPackageId =
       packageNameToIdMap[recommendedPackageNormalized];
-
-    // Log the recommended package ID
-    console.log("Recommended Package ID:", recommendedPackageId);
 
     if (!recommendedPackageId) {
       res.status(500).json({
@@ -97,14 +85,27 @@ class userProfileController {
       return;
     }
 
-    // Save recommendation to the database
+   
     await PackageRecommendation.create({
       userId,
       packageId: recommendedPackageId,
     });
 
+    // Fetch the newly created UserProfile along with User data
+    const userProfileWithUser = await UserProfile.findOne({
+      where: { userId },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "email"], // specify fields from User table
+        },
+      ],
+    });
+
+    // Send the created user profile data with associated user data in the response
     res.status(200).json({
       message: "UserProfile created successfully",
+      userProfile: userProfileWithUser,
       recommendedPackage,
     });
   }
@@ -113,18 +114,24 @@ class userProfileController {
     req: Request,
     res: Response
   ): Promise<void> {
-    const data = await UserProfile.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["id", "email"],
-        },
-      ],
-    });
-    res.status(200).json({
-      message: "user fetched successfully",
-      data,
-    });
+    try {
+      const data = await UserProfile.findAll({
+        include: [
+          {
+            model: User,
+            attributes: ["id", "email"],
+          },
+        ],
+      });
+  
+      res.status(200).json({
+        message: "user fetched successfully",
+        data,
+      });
+    } catch (error) {
+      console.error("Error fetching user profiles:", error);
+      res.status(500).json({ message: "Error fetching user profiles", error });
+    }
   }
 
   public static async getOneUser(

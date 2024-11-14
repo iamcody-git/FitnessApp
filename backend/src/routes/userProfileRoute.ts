@@ -11,9 +11,6 @@ router.route("/customer/userprofile/:id")
 .get(authMiddleWare.isAuthenticated,errorHandler(userProfileController.getOneUser))
 
 
-
-
-
 router.route("/admin/userProfile")
 .get(authMiddleWare.isAuthenticated,authMiddleWare.resetrictTo(Role.ADMIN),errorHandler(userProfileController.getAllUserProfile))
 

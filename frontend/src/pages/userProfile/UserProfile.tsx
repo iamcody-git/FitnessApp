@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useAppDispatch } from '../../store/hooks';
-import { addToUserProfile } from '../../store/userProfileSlice';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector} from '../../store/hooks';
+import { addToUserProfile, resetStatus } from '../../store/userProfileSlice';
 import { useNavigate } from 'react-router-dom';
+import { authStatus } from '../../store/storetypes/storeTypes';
 
 const UserProfile = () => {
   const [formData, setFormData] = useState({
@@ -21,17 +22,33 @@ const UserProfile = () => {
       [name]: value,
     }));
   };
-  const navigate=useNavigate()
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formData); 
-    dispatch(addToUserProfile(formData)).then(() => {
-      navigate('/userprofile/dashboard');
+  const navigate = useNavigate();
+  const { status, singleUser } = useAppSelector((state) => state.userProfile);
+
+  useEffect(() => {
+    // Check if the status is successful and userProfile contains an id
+    if (status === authStatus.success && singleUser && singleUser.id) {
+      navigate(`/userProfile/dashboard/${singleUser.id}`);
     }
-    )
-  };
+  }, [status, singleUser, navigate]);
+    
+    const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      console.log('Form submitted', formData);
+      dispatch(resetStatus());
+    
+      try {
+        await dispatch(addToUserProfile(formData));
+      } catch (error) {
+        console.error('Error during form submission or navigation:', error);
+      }
+    };
 
   return (
+    <>
+    <div className="container mx-auto px-4 mt-10">
+    <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">User Profile Form</h2>
+  </div>
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-md">
       <div className="mb-4">
         <label className="block text-gray-700 font-medium mb-2" htmlFor="age">
@@ -121,6 +138,7 @@ const UserProfile = () => {
         Submit
       </button>
     </form>
+    </>
   );
 };
 
