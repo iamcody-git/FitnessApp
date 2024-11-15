@@ -27,9 +27,9 @@ const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
           </main>
           {/* <!-- ===== Main Content End ===== --> */}
         </div>
-        {/* <!-- ===== Content Area End ===== --> */}
+     
       </div>
-      {/* <!-- ===== Page Wrapper End ===== --> */}
+    
     </div>
   );
 };
