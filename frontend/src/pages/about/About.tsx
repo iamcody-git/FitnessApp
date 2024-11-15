@@ -1,8 +1,10 @@
-
+import Footer from "../components/Footer"
+import Navbar from "../components/Navbar"
 const About = () => {
   return (
    <>
-   <section className="bg-gray-100" id="aboutus">
+       <Navbar/>
+   <section className="bg-gray-100 mt-10" id="aboutus">
     <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             <div className="max-w-lg">
@@ -23,6 +25,7 @@ const About = () => {
         </div>
     </div>
 </section>
+<Footer/>
    </>
   )
 }

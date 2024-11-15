@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import { register, resetStatus } from '../../../store/authSlice'
 import { authStatus } from '../../../store/storetypes/storeTypes'
 import Navbar from '../../components/Navbar'
+import Footer from '../../components/Footer'
 
 
 const Register = () => {
@@ -25,6 +26,7 @@ const Register = () => {
     <>
     <Navbar/>
     <Form type="Register" onSubmit={handleRegister}/>
+    <Footer/>
     </>
   )
 }

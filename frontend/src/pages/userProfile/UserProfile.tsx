@@ -4,6 +4,8 @@ import { addToUserProfile, resetStatus } from '../../store/userProfileSlice';
 import { useNavigate } from 'react-router-dom';
 import { authStatus } from '../../store/storetypes/storeTypes';
 import { toast } from 'react-toastify';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const UserProfile = () => {
   const [formData, setFormData] = useState({
@@ -49,10 +51,11 @@ const UserProfile = () => {
     }
   return (
     <>
-    <div className="container mx-auto px-4 mt-10">
+    <Navbar/>
+    <div className="container mx-auto px-4 mt-24">
     <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center tracking-widest">User Profile Form</h2>
   </div>
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-green-300 shadow-md rounded-md">
+    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 mb-5 bg-green-300 shadow-md rounded-md">
       <div className="mb-4">
         <label className="block text-gray-700 font-medium mb-2" htmlFor="age">
           Age:
@@ -141,7 +144,7 @@ const UserProfile = () => {
         Submit
       </button>
     </form>
-    
+    <Footer/>
     </>
   );
 };

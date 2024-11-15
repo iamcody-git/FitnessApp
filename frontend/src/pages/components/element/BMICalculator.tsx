@@ -3,8 +3,8 @@ const BMICalculator = () => {
     return (
         <>
 
-            <div className="flex  w-full justify-center *:first-letter:flex-col md:flex-row items-center max-w-4xl mx-auto bg-gray-400 rounded-lg shadow-lg overflow-hidden">
-                <div className="p-8 w-full md:w-1/2">
+            <div className="flex  w-full justify-center *:first-letter:flex-col md:flex-row items-center max-w-4xl mx-auto bg-gray-400 rounded-lg shadow-lg overflow-hidden mb-5">
+                <div className="p-8 w-full md:w-1/2 ">
                     <h2 className="text-2xl font-bold text-red-600 mb-4 tracking-widest">CALCULATE YOUR</h2>
                     <h3 className="text-xl font-semibold text-gray-700 mb-8 ">BODY MASS INDEX</h3>
 

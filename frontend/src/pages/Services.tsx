@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react'
+import  { useEffect } from 'react'
 import Card from './components/Card'
 import { fetchPackage } from '../store/packageSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { Link } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 const Services = () => {
   const dispatch = useAppDispatch()
-  const { status, packages} = useAppSelector((state) => state.package)
+  const { packages} = useAppSelector((state) => state.package)
   
   useEffect(() => {
     dispatch(fetchPackage())
@@ -15,9 +17,10 @@ const Services = () => {
    console.log(packages)
    return (
     <>
-      <section className="py-10" id="services">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Our Available Packages</h2>
+          <Navbar/>
+      <section className="py-20 mt-10 mb-5 bg-white" id="services">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-green-500 mb-8 text-center">Our Available Packages</h2>
         </div>
         <div className='flex m-5 p-3 space-x-4 justify-center'>
           { packages.length > 0 && (
@@ -39,6 +42,7 @@ const Services = () => {
 </div>
         
       </section>
+      <Footer/>
     </>
   )
 }

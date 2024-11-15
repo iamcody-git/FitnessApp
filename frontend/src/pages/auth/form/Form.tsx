@@ -22,7 +22,7 @@ setUserData({
   }
   return (
     <>
-      <div className="flex items-center mt-0 justify-center h-screen">
+      <div className="flex items-center mt-0 justify-center h-screen bg-white">
         <div className="shadow-md p-10 w-[60%] max-w-md bg-green-200">
           <h1 className="text-center font-serif font-bold text-3xl mb-10">
             {type}
