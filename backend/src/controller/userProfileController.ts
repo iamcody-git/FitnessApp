@@ -41,6 +41,14 @@ class userProfileController {
         ? 3
         : 4;
 
+          const existingProfile = await UserProfile.findOne({ where: { userId } });
+          if (existingProfile) {
+            res.status(400).json({
+              message: "User already has a profile",
+            });
+            return;
+          }
+
     // Create the user profile
     await UserProfile.create({
       age,
@@ -85,7 +93,6 @@ class userProfileController {
       return;
     }
 
-   
     await PackageRecommendation.create({
       userId,
       packageId: recommendedPackageId,
@@ -105,8 +112,11 @@ class userProfileController {
     // Send the created user profile data with associated user data in the response
     res.status(200).json({
       message: "UserProfile created successfully",
-      userProfile: userProfileWithUser,
+      data:{
+     ...userProfileWithUser?.toJSON(),
       recommendedPackage,
+      }
+      
     });
   }
 
@@ -138,29 +148,42 @@ class userProfileController {
     req: AuthRequest,
     res: Response
   ): Promise<void> {
-    const id = req.params.id;
-    const data = await UserProfile.findOne({
+    const userId = req.params.id;
+    const user= await UserProfile.findOne({
       where: {
-        id: id,
+        userId,
       },
       include: [
         {
           model: User,
           attributes: ["id", "email", "username"],
         },
-    
+        
       ],
     });
-    if (!data) {
+    const packageRecommended =await PackageRecommendation.findOne({
+      where: {
+        userId,
+        },
+        attributes: [],
+        include:{
+          model: Package,
+          attributes: ["id", "packageName", "price", "description"],
+        }
+    })
+    if (!user) {
       res.status(404).json({
         message: "User not found",
       });
     } else {
       res.status(200).json({
-        message: "user fetched successfully",
-        data,
+        message: "User fetched successfully",
+          ...user.toJSON(),
+          ...packageRecommended?.toJSON()
+        
       });
     }
   }
 }
+
 export default userProfileController;

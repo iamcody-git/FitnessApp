@@ -1,6 +1,8 @@
+import { Package } from "./packageTypes";
 import { authStatus, User } from "./storeTypes";
 
 export interface UserProfile {
+  Package: Package;
     id:string,
    age:string,
    gender: string,
@@ -11,10 +13,10 @@ export interface UserProfile {
   User:User,
   createdAt:string,
   updatedAt:string,
-  recommendedPackage:string
 }
 export interface UserProfileState{
     userProfile:UserProfile [],
     status:authStatus ,
     singleUser:UserProfile|null,
+    errorMessage:string
 }

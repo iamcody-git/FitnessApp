@@ -22,11 +22,13 @@ interface User {
 interface AuthState {
   user: User ;
   status: string;
+  errorMessage:string
 }
 
 const initialState: AuthState = {
   user: {} as User,
   status: authStatus.loading,
+  errorMessage:""
 };
 const authSlice = createSlice({
   name: "auth",
@@ -46,11 +48,15 @@ const authSlice = createSlice({
     },
     resetToken(state:AuthState){
       state.user.token = ''
-    }
+    }, 
+    setErrorMessage(state: AuthState, action: PayloadAction<string>) {
+      state.errorMessage = action.payload;  
+    },
+
   },
 });
 
-export const { setUser, setStatus,resetStatus,setToken,resetToken} = authSlice.actions;
+export const { setUser, setStatus,resetStatus,setToken,resetToken,setErrorMessage} = authSlice.actions;
 export default authSlice.reducer;
 
 export function register(data: RegisterUser) {
@@ -62,6 +68,7 @@ export function register(data: RegisterUser) {
         dispatch(setStatus(authStatus.success))
 
       } else {
+        
         dispatch(setStatus(authStatus.error))
         
       }
@@ -84,9 +91,11 @@ export function login(data: LoginData) {
             localStorage.setItem('token',data)
         }
         else{
+          dispatch(setErrorMessage("Error"))
             dispatch(setStatus(authStatus.error))
         }
     }catch(error){
+      dispatch(setErrorMessage("Error"))
         console.log(error)
         dispatch(setStatus(authStatus.error))
     }

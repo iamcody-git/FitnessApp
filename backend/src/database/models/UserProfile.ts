@@ -38,5 +38,7 @@ class UserProfile extends Model {
     allowNull: true,
   })
   declare goal: string;
+  
+  
 }
 export default UserProfile;

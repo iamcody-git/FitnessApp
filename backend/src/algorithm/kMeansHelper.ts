@@ -7,9 +7,9 @@ function calculateDistance(userVector: number[], centroid: number[]): number {
   
   export function getRecommendedPackage(userProfileVector: number[]): string {
     const centroids: { [key: string]: number[] } = {
-      Basic: [1, 1, 1, 1],      // Basic package centroid
-      Gold: [2, 2, 2, 1],       // Gold package centroid
-      Platinum: [3, 3, 3, 1]    // Platinum package centroid
+      Basic: [1, 1, 1, 1],     
+      Gold: [2, 2, 2, 1],       
+      Platinum: [3, 3, 3, 1]   
     };
   
     const distances: { [key in keyof typeof centroids]: number } = {

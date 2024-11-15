@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector} from '../../store/hooks';
 import { addToUserProfile, resetStatus } from '../../store/userProfileSlice';
 import { useNavigate } from 'react-router-dom';
 import { authStatus } from '../../store/storetypes/storeTypes';
+import { toast } from 'react-toastify';
 
 const UserProfile = () => {
   const [formData, setFormData] = useState({
@@ -23,12 +24,12 @@ const UserProfile = () => {
     }));
   };
   const navigate = useNavigate();
-  const { status, singleUser } = useAppSelector((state) => state.userProfile);
+  const { status, singleUser ,errorMessage} = useAppSelector((state) => state.userProfile);
 
   useEffect(() => {
     // Check if the status is successful and userProfile contains an id
-    if (status === authStatus.success && singleUser && singleUser.id) {
-      navigate(`/userProfile/dashboard/${singleUser.id}`);
+    if (status === authStatus.success && singleUser && singleUser.userId) {
+      navigate(`/userProfile/dashboard/${singleUser.userId}`);
     }
   }, [status, singleUser, navigate]);
     
@@ -43,7 +44,9 @@ const UserProfile = () => {
         console.error('Error during form submission or navigation:', error);
       }
     };
-
+    if (errorMessage) {
+      toast.error(errorMessage);  // Show error as a toast notification
+    }
   return (
     <>
     <div className="container mx-auto px-4 mt-10">
@@ -138,6 +141,7 @@ const UserProfile = () => {
         Submit
       </button>
     </form>
+    
     </>
   );
 };

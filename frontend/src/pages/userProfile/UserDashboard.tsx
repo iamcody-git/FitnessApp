@@ -5,8 +5,9 @@ import { fetchUserProfileById } from '../../store/userProfileSlice';
 
 const UserDashboard = () => {
   const { id } = useParams<{ id: string }>();
+  console.log("milan id ",id)
   const dispatch = useAppDispatch();
-  const { status, singleUser,recommendedPackage } = useAppSelector((state) => state.userProfile);
+  const { status, singleUser } = useAppSelector((state) => state.userProfile);
 
   useEffect(() => {
     console.log('useEffect triggered, ID:', id);
@@ -32,19 +33,31 @@ console.log('Current singleUser:', singleUser);
       <h1>User Dashboard</h1>
       <div>
         <h2>Profile Information</h2>
-        <p><strong>ID:</strong> {singleUser.id}</p>
-        <p><strong>Age:</strong> {singleUser.age}</p>
-        <p><strong>Gender:</strong> {singleUser.gender}</p>
-        <p><strong>Fitness Level:</strong> {singleUser.fitness_level}</p>
-        <p><strong>Activity Level:</strong> {singleUser.activity_level}</p>
-        <p><strong>Goal:</strong> {singleUser.goal}</p>
-        <p><strong>Created At:</strong> {new Date(singleUser.createdAt).toLocaleString()}</p>
-        <p><strong>Updated At:</strong> {new Date(singleUser.updatedAt).toLocaleString()}</p>
+        <p><strong>ID:</strong> {singleUser?.id}</p>
+        <p><strong>Age:</strong> {singleUser?.age}</p>
+        <p><strong>Gender:</strong> {singleUser?.gender}</p>
+        <p><strong>Fitness Level:</strong> {singleUser?.fitness_level}</p>
+        <p><strong>Activity Level:</strong> {singleUser?.activity_level}</p>
+        <p><strong>Goal:</strong> {singleUser?.goal}</p>
+        <p><strong>Created At:</strong> {new Date(singleUser?.createdAt).toLocaleString()}</p>
+        <p><strong>Updated At:</strong> {new Date(singleUser?.updatedAt).toLocaleString()}</p>
+  
         <h2>User Information</h2>
-        <p><strong>User ID:</strong> {singleUser.User?.id}</p>
-        <p><strong>Email:</strong> {singleUser.User?.email}</p>
-        <h2>Recommended Package</h2>
-        {/* <p><strong>Package:</strong> {recommendedPackage || 'N/A'}</p> */}
+        <p><strong>User ID:</strong> {singleUser?.User?.id}</p>
+        <p><strong>Email:</strong> {singleUser?.User?.email}</p>
+  
+       
+         {/* Accessing Package details if available */}
+      {singleUser?.Package ? (
+        <div>
+          <h2>Recommended Package</h2>
+          <p><strong>Package Name:</strong> {singleUser.Package.packageName}</p>
+          <p><strong>Description:</strong> {singleUser.Package.description}</p>
+          <p><strong>Price:</strong> ${singleUser.Package.price}</p>
+        </div>
+      ) : (
+        <p>No recommended package found for this user.</p>
+      )}
       </div>
     </div>
   );
