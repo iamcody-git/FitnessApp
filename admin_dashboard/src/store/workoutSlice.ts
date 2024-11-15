@@ -8,6 +8,7 @@ import { APIAuthenticated } from '../http';
 const initialState: Initialstate = {
     workout:[],
     status: authStatus.loading,
+    singleWorkout:null
  
 };
 
@@ -20,10 +21,13 @@ const workoutSlice = createSlice({
     },
     setWorkout(state:Initialstate,action:PayloadAction<Workout[]>){
         state.workout=action.payload
+    },
+    setSingleWorkout(state:Initialstate,action:PayloadAction<Workout>){
+      state.singleWorkout=action.payload
     }
   },
 });
-export const { setStatus,setWorkout } =
+export const { setStatus,setWorkout,setSingleWorkout } =
   workoutSlice.actions;
 export default workoutSlice.reducer;
 
@@ -34,8 +38,10 @@ export function addWorkout(data: Workout) {
       try {
         const response = await APIAuthenticated.post('/admin/workout', data);
         if (response.status == 200) {
+          console.log("hello");
+          console.log(response.data)
+          dispatch(setSingleWorkout(response.data.data))
           dispatch(setStatus(authStatus.success));
-          
         } else {
           dispatch(setStatus(authStatus.error));
         }

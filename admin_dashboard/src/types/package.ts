@@ -2,7 +2,7 @@ export interface User {
   id: string;
   email: string;
   username: string;
-  created_at: string;
+  createdAt: string;
 }
 import { authStatus } from './status';
 

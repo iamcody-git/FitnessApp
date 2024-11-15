@@ -18,5 +18,6 @@ interface User {
  export interface Initialstate{
     status:authStatus
     workout:Workout[]
+    singleWorkout:Workout|null
     
 }

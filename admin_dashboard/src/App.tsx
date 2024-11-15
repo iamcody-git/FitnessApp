@@ -6,7 +6,6 @@ import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
 import Chart from './pages/Chart';
 import ECommerce from './pages/Dashboard/ECommerce';
-import FormElements from './pages/Form/FormElements';
 import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
@@ -18,6 +17,7 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 
 function App() {
+
   const [loading, setLoading] = useState<boolean>(true);
   const { pathname } = useLocation();
 
@@ -62,17 +62,6 @@ function App() {
               <DefaultLayout>
               <PageTitle title="Profile " />
               <Profile />
-              </DefaultLayout>
-            </>
-          }
-        />
-        <Route
-          path="/forms/form-elements"
-          element={
-            <>
-              <DefaultLayout>
-              <PageTitle title="Form Elements " />
-              <FormElements />
               </DefaultLayout>
             </>
           }
