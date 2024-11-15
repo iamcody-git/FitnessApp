@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const Hero = () => {
     return (
@@ -16,13 +16,13 @@ const Hero = () => {
                         <div className="h-full w-full  flex flex-col relative space-y-6">
                             <div className="mt-auto mb-0 text-gray-50 md:pb-36 space-y-6">
                                 <span className="font-light text-sm text-accent-500 ">
-                                    short title
+                                    Fitness World
                                 </span>
                                 <h1 className="text-3xl md:text-5xl max-w-[30rem] font-medium">
-                                    motivation line
+                                "Where sweat meets SUCCESS"
                                 </h1>
-                                <p className="max-w-[30rem] font-light ml-4 before:content-[''] relative before:absolute before:w-px before:h-full before:left-0 before:top-0 before:-translate-x-4 before:bg-accent-500 md:text-base text-sm">
-                                    description about 50 words
+                                <p className="max-w-[30rem] font-light ml-4 before:content-[''] relative before:absolute before:w-px before:h-full before:left-0 before:top-0 before:-translate-x-4 before:bg-accent-500 md:text-base text-sm text-justify">
+                                Fitness is not just about working out; it's about embracing a lifestyle that fosters strength, resilience, and overall well-being. At our gym, we provide the space, support, and community you need to challenge yourself and achieve your goals. From intense training sessions to mindful recovery, every step is designed to push you forward and build not just a better body, but a better you. Start your journey today and discover the power within.
                                 </p>
                                 <div className="md:flex-row flex-col flex gap-4">
                                     <button className="inline-block text-base font-medium px-12 py-2 bg-accent-400 rounded-lg cursor-pointer">

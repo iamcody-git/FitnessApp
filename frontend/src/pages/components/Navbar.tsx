@@ -1,9 +1,9 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="w-dvw absolute top-0 left-1/2 -translate-x-1/2 z-[1000] py-4">
+    <header className="w-dvw absolute top-0 left-1/2 -translate-x-1/2 z-[1000] py-4 bg-black">
       <div className="max-w-[120rem] text-gray-50 px-6 md:px-8 lg:px-10">
         <nav className="w-full flex flex-row items-center font-sans">
         <Link

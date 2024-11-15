@@ -1,4 +1,3 @@
-import React from 'react'
 
 const About = () => {
   return (
@@ -8,7 +7,7 @@ const About = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             <div className="max-w-lg">
                 <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">About Us</h2>
-                <p className="mt-4 text-gray-600 text-lg">
+                <p className="mt-4 text-gray-600 text-lg text-justify">
                     Bappa flour mill provides our customers with the highest quality products and services. We offer a
                     wide variety of flours and spices to choose from, and we are always happy to help our customers find
                     the perfect products for their needs.

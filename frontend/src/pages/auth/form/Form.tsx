@@ -23,11 +23,11 @@ setUserData({
   return (
     <>
       <div className="flex items-center mt-0 justify-center h-screen">
-        <div className="shadow-md p-10 w-[60%] max-w-md">
+        <div className="shadow-md p-10 w-[60%] max-w-md bg-green-200">
           <h1 className="text-center font-serif font-bold text-3xl mb-10">
             {type}
           </h1>
-          <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
+          <form className="max-w-sm mx-auto" onSubmit={handleSubmit} >
             <div className="relative z-0 w-full mb-5 group">
               <input
                 type="email"
