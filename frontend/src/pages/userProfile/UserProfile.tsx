@@ -29,7 +29,6 @@ const UserProfile = () => {
   const { status, singleUser ,errorMessage} = useAppSelector((state) => state.userProfile);
 
   useEffect(() => {
-    // Check if the status is successful and userProfile contains an id
     if (status === authStatus.success && singleUser && singleUser.userId) {
       navigate(`/userProfile/dashboard/${singleUser.userId}`);
     }

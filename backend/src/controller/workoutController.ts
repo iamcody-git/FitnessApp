@@ -20,7 +20,7 @@ class WorkoutController {
       });
       return;
     }
-    await Workout.create({
+    const data=await Workout.create({
      workoutName,
      type,
      level,
@@ -31,6 +31,7 @@ class WorkoutController {
     });
     res.status(200).json({
       message: "workout created successfully",
+      data
     });
   }
   public static async getAllWokout(
